@@ -23,5 +23,14 @@ namespace Application.DTOs
         public record CartEntryDto(
             string Folio, int CartTypeId    
         );
+
+        public record CartHistoryDto(
+            int Id,
+            string Folio,
+            string CartTypeName,
+            DateTime EntryDate,
+            DateTime? ExitDate,
+            string Status
+        );
     }
 }
