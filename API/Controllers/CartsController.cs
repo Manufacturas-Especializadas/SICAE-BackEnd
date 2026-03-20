@@ -11,18 +11,18 @@ namespace API.Controllers
     public class CartsController : ControllerBase
     {
 
-        private readonly ICartRepository _respository;
+        private readonly ICartRepository _repository;
 
         public CartsController(ICartRepository repository)
         {
-            _respository = repository;
+            _repository = repository;
         }
 
         [HttpGet]
         [Route("history")]
         public async Task<IActionResult> GetHistory()
         {
-            var logs = await _respository.GetAllAsync();
+            var logs = await _repository.GetAllAsync();
 
             return Ok(logs);
         }
@@ -31,7 +31,7 @@ namespace API.Controllers
         [Route("stats")]
         public async Task<IActionResult> GetStats()
         {
-            var (large, small) = await _respository.GetActiveCountsAsync();
+            var (large, small) = await _repository.GetActiveCountsAsync();
 
             return Ok(new
             {
@@ -48,7 +48,7 @@ namespace API.Controllers
             if (string.IsNullOrEmpty(dto.Folio))
                 return BadRequest(new { message = "Folio is required" });
 
-            if (await _respository.ExistsActiveAsync(dto.Folio))
+            if (await _repository.ExistsActiveAsync(dto.Folio))
                 return BadRequest(new { message = $"Cart {dto.Folio} is already in plant." });
 
             var cart = new CartLog
@@ -60,7 +60,7 @@ namespace API.Controllers
                 ExitDate = null
             };
 
-            await _respository.AddAsync(cart);
+            await _repository.AddAsync(cart);
 
             return CreatedAtAction(nameof(GetHistory), new { id = cart.Id }, cart);
         }
@@ -69,7 +69,7 @@ namespace API.Controllers
         [Route("exit/{folio}")]
         public async Task<IActionResult> RegisterExit(string folio)
         {
-            var cart = await _respository.GetActiveByFolioAsync(folio);
+            var cart = await _repository.GetActiveByFolioAsync(folio);
 
             if(cart == null)
             {
@@ -82,7 +82,7 @@ namespace API.Controllers
             cart.ExitDate = DateTime.Now;
             cart.Status = CartStatus.Completed;
 
-            await _respository.UpdateAsync(cart);
+            await _repository.UpdateAsync(cart);
 
             return NoContent();
         }
