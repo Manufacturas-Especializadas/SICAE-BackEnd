@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 namespace Core.Entities
 {
 
-    public enum CartSize { Large, Small }
+    public enum CartSize {
+        Large = 1,
+        Small = 2
+    }
 
     public enum CartStatus { InPlant, Completed }
 
