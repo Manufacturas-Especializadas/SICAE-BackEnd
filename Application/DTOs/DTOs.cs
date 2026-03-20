@@ -19,5 +19,9 @@ namespace Application.DTOs
             DateTime? ExitDate,
             string Status
         );
+
+        public record CartEntryDto(
+            string Folio, int CartTypeId    
+        );
     }
 }
