@@ -72,22 +72,41 @@ namespace API.Controllers
         [Route("exit/{folio}")]
         public async Task<IActionResult> RegisterExit(string folio)
         {
-            var cart = await _repository.GetActiveByFolioAsync(folio);
+            if (string.IsNullOrWhiteSpace(folio))
+            {
+                return BadRequest(new { message = "El folio no puede estar vacío." });
+            }
 
-            if(cart == null)
+            var normalizedFolio = folio.Trim().ToUpper();
+
+            var cart = await _repository.GetActiveByFolioAsync(normalizedFolio);
+
+            if (cart == null)
             {
                 return NotFound(new
                 {
-                    message = "No se encontró ningún carrito activo con el Folio proporcionado."
+                    message = $"No se encontró el folio {normalizedFolio} activo en planta o ya marcó salida."
                 });
             }
 
             cart.ExitDate = DateTime.Now;
             cart.Status = CartStatus.Completed;
 
-            await _repository.UpdateAsync(cart);
+            try
+            {
+                await _repository.UpdateAsync(cart);
 
-            return NoContent();
+                return Ok(new
+                {
+                    message = "Salida registrada con éxito.",
+                    folio = cart.Folio,
+                    exitDate = cart.ExitDate
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error interno al procesar la salida." });
+            }
         }
     }
 }
