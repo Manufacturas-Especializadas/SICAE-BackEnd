@@ -17,7 +17,7 @@ namespace Core.Entities
 
         public string Folio { get; set; } = string.Empty;
 
-        public CartSize Type { get; set; }
+        public CartSize CartTypeId { get; set; }
 
         public DateTime EntryDate { get; set; } = DateTime.UtcNow;
 
