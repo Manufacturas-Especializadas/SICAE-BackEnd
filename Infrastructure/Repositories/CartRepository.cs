@@ -22,9 +22,10 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<CartLog>> GetAllAsync()
         {
             return await _context.CartLogs
-                        .OrderByDescending(c => c.EntryDate)
-                        .AsNoTracking()
-                        .ToListAsync();
+                    .Include(c => c.CartType)
+                    .OrderByDescending(c => c.EntryDate)
+                    .AsNoTracking()
+                    .ToListAsync();
         }
 
         public async Task<CartLog?> GetActiveByFolioAsync(string folio)
@@ -62,8 +63,8 @@ namespace Infrastructure.Repositories
                     .ToListAsync();
 
             return (
-                Large: counts.FirstOrDefault(c => c.Type == CartSize.Large)?.Count ?? 0,
-                Small: counts.FirstOrDefault(c => c.Type == CartSize.Small)?.Count ?? 0
+                Large: counts.FirstOrDefault(c => c.Type == (int)CartSize.Large)?.Count ?? 0,
+                Small: counts.FirstOrDefault(c => c.Type == (int)CartSize.Small)?.Count ?? 0
             );
         }
     }
