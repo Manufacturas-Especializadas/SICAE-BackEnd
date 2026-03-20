@@ -32,5 +32,7 @@ namespace Application.DTOs
             DateTime? ExitDate,
             string Status
         );
+
+        public record CartExtiDto(string folio);
     }
 }
