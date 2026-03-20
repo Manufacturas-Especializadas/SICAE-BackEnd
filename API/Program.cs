@@ -1,4 +1,5 @@
 
+using Application.Services;
 using Core.Interfaces;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;
@@ -29,6 +30,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<CartService>();
 
 var app = builder.Build();
 
