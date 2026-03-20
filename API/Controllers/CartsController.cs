@@ -2,6 +2,7 @@
 using Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static Application.DTOs.DTOs;
 
 namespace API.Controllers
 {
@@ -42,19 +43,22 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("entry")]
-        public async Task<IActionResult> RegisterEntry([FromBody] CartLog cart)
+        public async Task<IActionResult> RegisterEntry([FromBody] CartEntryDto dto)
         {
-            if(await _respository.ExistsActiveAsync(cart.Folio))
-            {
-                return BadRequest(new
-                {
-                    message = $"El carro con Folio {cart.Folio} ya está en la planta."
-                });
-            }
+            if (string.IsNullOrEmpty(dto.Folio))
+                return BadRequest(new { message = "Folio is required" });
 
-            cart.EntryDate = DateTime.Now;
-            cart.Status = CartStatus.InPlant;
-            cart.ExitDate = null;
+            if (await _respository.ExistsActiveAsync(dto.Folio))
+                return BadRequest(new { message = $"Cart {dto.Folio} is already in plant." });
+
+            var cart = new CartLog
+            {
+                Folio = dto.Folio.ToUpper(),
+                CartTypeId = (CartSize)dto.CartTypeId,
+                EntryDate = DateTime.Now,
+                Status = CartStatus.InPlant,
+                ExitDate = null
+            };
 
             await _respository.AddAsync(cart);
 
