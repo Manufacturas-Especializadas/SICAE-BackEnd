@@ -1,0 +1,75 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\jose.lugo\\Music\\SICAE - BackEnd\\SICAE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{87611FF0-A9B4-40A6-95B5-A34BFCE3C1DD}|Infrastructure\\Infrastructure.csproj|c:\\users\\jose.lugo\\music\\sicae - backend\\sicae\\infrastructure\\repositories\\cartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87611FF0-A9B4-40A6-95B5-A34BFCE3C1DD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\cartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E1E5520C-1578-4C99-A47E-719B51861586}|Core\\Core.csproj|c:\\users\\jose.lugo\\music\\sicae - backend\\sicae\\core\\interfaces\\icartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1E5520C-1578-4C99-A47E-719B51861586}|Core\\Core.csproj|solutionrelative:core\\interfaces\\icartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87611FF0-A9B4-40A6-95B5-A34BFCE3C1DD}|Infrastructure\\Infrastructure.csproj|c:\\users\\jose.lugo\\music\\sicae - backend\\sicae\\infrastructure\\persistence\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87611FF0-A9B4-40A6-95B5-A34BFCE3C1DD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\persistence\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CartRepository.cs",
+              "DocumentMoniker": "C:\\Users\\jose.lugo\\Music\\SICAE - BackEnd\\SICAE\\Infrastructure\\Repositories\\CartRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\CartRepository.cs",
+              "ToolTip": "C:\\Users\\jose.lugo\\Music\\SICAE - BackEnd\\SICAE\\Infrastructure\\Repositories\\CartRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\CartRepository.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAA3wCcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-18T20:11:28.921Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ICartRepository.cs",
+              "DocumentMoniker": "C:\\Users\\jose.lugo\\Music\\SICAE - BackEnd\\SICAE\\Core\\Interfaces\\ICartRepository.cs",
+              "RelativeDocumentMoniker": "Core\\Interfaces\\ICartRepository.cs",
+              "ToolTip": "C:\\Users\\jose.lugo\\Music\\SICAE - BackEnd\\SICAE\\Core\\Interfaces\\ICartRepository.cs",
+              "RelativeToolTip": "Core\\Interfaces\\ICartRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-18T21:24:36.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\jose.lugo\\Music\\SICAE - BackEnd\\SICAE\\Infrastructure\\Persistence\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Persistence\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\jose.lugo\\Music\\SICAE - BackEnd\\SICAE\\Infrastructure\\Persistence\\AppDbContext.cs",
+              "RelativeToolTip": "Infrastructure\\Persistence\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-18T20:14:08.281Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
