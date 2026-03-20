@@ -1,4 +1,5 @@
-﻿using Core.Interfaces;
+﻿using Core.Entities;
+using Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,19 @@ namespace Application.Services
                 l.ExitDate,
                 l.Status.ToString()
             ));
+        }
+
+        public async Task<bool> RegisterExitAsync(string folio)
+        {
+            var cart = await _repository.GetActiveByFolioAsync(folio);
+
+            if (cart == null) return false;
+
+            cart.ExitDate = DateTime.Now;
+            cart.Status = CartStatus.Completed;
+
+            await _repository.UpdateAsync(cart);
+            return true;
         }
     }
 }
