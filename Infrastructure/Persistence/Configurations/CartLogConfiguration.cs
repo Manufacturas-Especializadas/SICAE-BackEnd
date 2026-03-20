@@ -14,7 +14,6 @@ namespace Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<CartLog> builder)
         {
             builder.ToTable("CartLogs");
-
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Folio)
@@ -23,8 +22,11 @@ namespace Infrastructure.Persistence.Configurations
                 .IsUnicode(false);
 
             builder.Property(x => x.CartTypeId)
-                .HasColumnName("cartTypeId")
-                .HasMaxLength(20);
+                .HasColumnName("cartTypeId");
+
+            builder.HasOne(x => x.CartType)
+                .WithMany(t => t.CartLogs)
+                .HasForeignKey(x => x.CartTypeId);
 
             builder.Property(x => x.Status)
                 .HasConversion<string>()
