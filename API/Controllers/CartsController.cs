@@ -1,4 +1,6 @@
-﻿using Core.Entities;
+﻿using Application.Interfaces;
+using Application.Services;
+using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,19 +14,20 @@ namespace API.Controllers
     {
 
         private readonly ICartRepository _repository;
+        private readonly CartService _cartService;
 
-        public CartsController(ICartRepository repository)
+        public CartsController(ICartRepository repository, CartService cartService)
         {
             _repository = repository;
+            _cartService = cartService;
         }
 
         [HttpGet]
         [Route("history")]
         public async Task<IActionResult> GetHistory()
         {
-            var logs = await _repository.GetAllAsync();
-
-            return Ok(logs);
+            var history = await _cartService.GetHistoryAsync();
+            return Ok(history);
         }
 
         [HttpGet]
@@ -54,7 +57,7 @@ namespace API.Controllers
             var cart = new CartLog
             {
                 Folio = dto.Folio.ToUpper(),
-                CartTypeId = (CartSize)dto.CartTypeId,
+                CartTypeId = dto.CartTypeId,
                 EntryDate = DateTime.Now,
                 Status = CartStatus.InPlant,
                 ExitDate = null
