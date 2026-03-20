@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,12 +21,14 @@ namespace Core.Entities
 
         public string Folio { get; set; } = string.Empty;
 
-        public CartSize CartTypeId { get; set; }
+        public int CartTypeId { get; set; }
 
         public DateTime EntryDate { get; set; } = DateTime.UtcNow;
 
         public DateTime? ExitDate { get; set; }
 
         public CartStatus Status { get; set; } = CartStatus.InPlant;
+
+        public virtual CartType? CartType { get; set; }
     }
 }
