@@ -24,7 +24,6 @@ namespace Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.CartTypeId)
                 .HasColumnName("cartTypeId")
-                .HasConversion<string>()
                 .HasMaxLength(20);
 
             builder.Property(x => x.Status)
