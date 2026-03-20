@@ -22,7 +22,8 @@ namespace Infrastructure.Persistence.Configurations
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            builder.Property(x => x.Type)
+            builder.Property(x => x.CartTypeId)
+                .HasColumnName("cartTypeId")
                 .HasConversion<string>()
                 .HasMaxLength(20);
 

@@ -57,7 +57,7 @@ namespace Infrastructure.Repositories
         {
             var counts = await _context.CartLogs
                     .Where(c => c.Status == CartStatus.InPlant)
-                    .GroupBy(c => c.Type)
+                    .GroupBy(c => c.CartTypeId)
                     .Select(g => new { Type = g.Key, Count = g.Count() })
                     .ToListAsync();
 
