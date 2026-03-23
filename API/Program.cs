@@ -11,8 +11,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connection = builder.Configuration.GetConnectionString("Connection");
-var allowedConnection = builder.Configuration.GetValue<string>("OrigenesPermitidos")!.Split(',');
+var connection = builder.Configuration.GetConnectionString("Connection")
+                 ?? throw new InvalidOperationException("La cadena de conexión 'Connection' no se encontró.");
+
+var originsConfig = builder.Configuration.GetValue<string>("OrigenesPermitidos") ?? "";
+var allowedConnection = originsConfig.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                     .Select(o => o.Trim()) 
+                                     .ToArray();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
