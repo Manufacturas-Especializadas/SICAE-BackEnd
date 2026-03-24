@@ -53,12 +53,15 @@ namespace API.Controllers
 
             if (await _repository.ExistsActiveAsync(dto.Folio))
                 return BadRequest(new { message = $"Cart {dto.Folio} is already in plant." });
-
+            
             var cart = new CartLog
             {
                 Folio = dto.Folio.ToUpper(),
                 CartTypeId = dto.CartTypeId,
-                EntryDate = DateTime.Now,
+                EntryDate = TimeZoneInfo.ConvertTimeFromUtc(
+                    DateTime.UtcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time (Mexico)")
+                ),
                 Status = CartStatus.InPlant,
                 ExitDate = null
             };
@@ -89,7 +92,10 @@ namespace API.Controllers
                 });
             }
 
-            cart.ExitDate = DateTime.Now;
+            cart.ExitDate = TimeZoneInfo.ConvertTimeFromUtc(
+                DateTime.UtcNow,
+                TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time (Mexico)")
+            );
             cart.Status = CartStatus.Completed;
 
             try

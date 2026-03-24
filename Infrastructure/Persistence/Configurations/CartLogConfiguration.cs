@@ -33,7 +33,8 @@ namespace Infrastructure.Persistence.Configurations
                 .HasMaxLength(20);
 
             builder.Property(x => x.EntryDate)
-                .HasDefaultValueSql("GETDATE()");
+                .HasDefaultValueSql("GETDATE()")
+                .ValueGeneratedOnAdd();
         }
     }
 }
