@@ -36,6 +36,17 @@ namespace Infrastructure.Repositories
                                 && c.Status == CartStatus.InPlant);
         }
 
+        public async Task<IEnumerable<(int Year, int Month)>> GetAvailableMonthsAsync()
+        {
+            return await _context.CartLogs
+                .Select(c => new { c.EntryDate.Year, c.EntryDate.Month })
+                .Distinct()
+                .OrderByDescending(x => x.Year)
+                .ThenByDescending(x => x.Month)
+                .Select(x => ValueTuple.Create(x.Year, x.Month))
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<CartLog>> GetByMonthAsync(int year, int month)
         {
             var firstDayOfMonth = new DateTime(year, month, 1);

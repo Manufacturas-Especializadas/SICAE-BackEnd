@@ -45,13 +45,32 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Route("available-months")]
+        public async Task<IActionResult> GetAvailableMonths()
+        {
+            var months = await _cartService.GetAvailableMonthsAsync();
+            return Ok(months);
+        }
+
+        [HttpGet]
         [Route("report/{year}/{month}")]
         public async Task<IActionResult> GetMonthlyReport(int year, int month)
         {
-            if (month < 1 || month > 12) return BadRequest("Mes no válido");
+            try
+            {
+                var fileContent = await _cartService.GenerateExcelReportAsync(year, month);
+                string fileName = $"Reporte_Carros_{year}_{month}.xlsx";
 
-            var report = await _cartService.GetMonthlyReportAsync(year, month);
-            return Ok(report);
+                return File(
+                    fileContent,
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    fileName
+                );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al generar el Excel", detail = ex.Message });
+            }
         }
 
         [HttpPost]

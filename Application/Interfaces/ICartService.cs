@@ -9,10 +9,6 @@ namespace Application.Interfaces
 {
     public interface ICartService
     {
-        Task<CartResponse> RegisterEntry(CartEntryRequest request);
-
-        Task RegisterExit(string folio);
-
-        Task<IEnumerable<CartResponse>> GetDashboard();
+        Task<byte[]> GenerateExcelReportAsync(int year, int month);
     }
 }

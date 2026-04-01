@@ -22,5 +22,7 @@ namespace Core.Interfaces
         Task<(int Large, int Small)> GetActiveCountsAsync();
 
         Task<IEnumerable<CartLog>> GetByMonthAsync(int year, int month);
+
+        Task<IEnumerable<(int Year, int Month)>> GetAvailableMonthsAsync();
     }
 }
