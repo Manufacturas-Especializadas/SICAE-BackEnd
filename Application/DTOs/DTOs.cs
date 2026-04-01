@@ -24,6 +24,11 @@ namespace Application.DTOs
             string Folio, int CartTypeId    
         );
 
+        public record CartUpdateDto(
+            string Folio,
+            int CartTypeId
+        );
+
         public record CartHistoryDto(
             int Id,
             string Folio,
