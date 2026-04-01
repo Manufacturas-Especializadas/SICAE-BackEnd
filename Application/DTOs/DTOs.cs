@@ -34,5 +34,7 @@ namespace Application.DTOs
         );
 
         public record CartExtiDto(string folio);
+
+        public record AvailableMonthDto(int Year, int Month, string MonthName, string DisplayName);
     }
 }
