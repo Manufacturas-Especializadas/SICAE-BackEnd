@@ -143,5 +143,25 @@ namespace API.Controllers
                 return StatusCode(500, new { message = "Error interno al procesar la salida." });
             }
         }
+
+        [HttpPut]
+        [Route("update/{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] CartUpdateDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Folio))
+                return BadRequest(new { message = "El folio no puede estar vacío." });
+
+            try
+            {
+                var result = await _cartService.UpdateCartAsync(id, dto);
+                if (!result) return NotFound(new { message = "Registro no encontrado." });
+
+                return Ok(new { message = "Registro actualizado con éxito." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }
