@@ -123,5 +123,17 @@ namespace Application.Services
             await _repository.UpdateAsync(cart);
             return true;
         }
+
+        public async Task<bool> UpdateCartAsync(int id, CartUpdateDto dto)
+        {
+            var cart = await _repository.GetByIdAsync(id);
+            if (cart == null) return false;
+
+            cart.Folio = dto.Folio.ToUpper();
+            cart.CartTypeId = dto.CartTypeId;
+
+            await _repository.UpdateAsync(cart);
+            return true;
+        }
     }
 }
