@@ -23,7 +23,8 @@ namespace Infrastructure.Repositories
         {
             return await _context.CartLogs
                     .Include(c => c.CartType)
-                    .OrderByDescending(c => c.EntryDate)
+                    .OrderBy(c => c.Status == CartStatus.Completed)            
+                    .ThenByDescending(c => c.EntryDate)
                     .AsNoTracking()
                     .ToListAsync();
         }
