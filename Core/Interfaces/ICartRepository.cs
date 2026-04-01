@@ -24,5 +24,7 @@ namespace Core.Interfaces
         Task<IEnumerable<CartLog>> GetByMonthAsync(int year, int month);
 
         Task<IEnumerable<(int Year, int Month)>> GetAvailableMonthsAsync();
+
+        Task<CartLog?> GetByIdAsync(int id);
     }
 }
