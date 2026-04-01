@@ -10,5 +10,7 @@ namespace Application.Interfaces
     public interface ICartService
     {
         Task<byte[]> GenerateExcelReportAsync(int year, int month);
+
+        Task<bool> UpdateCartAsync(int id, CartUpdateDto dto);
     }
 }
