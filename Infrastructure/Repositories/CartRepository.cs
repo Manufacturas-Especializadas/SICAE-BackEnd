@@ -36,6 +36,13 @@ namespace Infrastructure.Repositories
                                 && c.Status == CartStatus.InPlant);
         }
 
+        public async Task<CartLog?> GetByIdAsync(int id)
+        {
+            return await _context.CartLogs
+                .Include(c => c.CartType)
+                .FirstOrDefaultAsync(c => c.Id == id);
+        }
+
         public async Task<IEnumerable<(int Year, int Month)>> GetAvailableMonthsAsync()
         {
             return await _context.CartLogs
