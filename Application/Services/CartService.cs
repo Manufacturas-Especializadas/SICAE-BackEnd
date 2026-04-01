@@ -32,6 +32,20 @@ namespace Application.Services
             ));
         }
 
+        public async Task<IEnumerable<CartHistoryDto>> GetMonthlyReportAsync(int year, int month)
+        {
+            var logs = await _repository.GetByMonthAsync(year, month);
+
+            return logs.Select(l => new CartHistoryDto(
+                l.Id,
+                l.Folio,
+                l.CartType?.TypeName ?? "N/A",
+                l.EntryDate,
+                l.ExitDate,
+                l.Status.ToString()
+            ));
+        }
+
         public async Task<bool> RegisterExitAsync(string folio)
         {
             var cart = await _repository.GetActiveByFolioAsync(folio);

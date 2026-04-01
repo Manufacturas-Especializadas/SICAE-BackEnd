@@ -44,6 +44,16 @@ namespace API.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("report/{year}/{month}")]
+        public async Task<IActionResult> GetMonthlyReport(int year, int month)
+        {
+            if (month < 1 || month > 12) return BadRequest("Mes no válido");
+
+            var report = await _cartService.GetMonthlyReportAsync(year, month);
+            return Ok(report);
+        }
+
         [HttpPost]
         [Route("entry")]
         public async Task<IActionResult> RegisterEntry([FromBody] CartEntryDto dto)

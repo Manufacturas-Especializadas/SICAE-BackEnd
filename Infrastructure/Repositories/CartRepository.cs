@@ -36,6 +36,24 @@ namespace Infrastructure.Repositories
                                 && c.Status == CartStatus.InPlant);
         }
 
+        public async Task<IEnumerable<CartLog>> GetByMonthAsync(int year, int month)
+        {
+            var firstDayOfMonth = new DateTime(year, month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+            return await _context.CartLogs
+                .Include(c => c.CartType)
+                .Where(c =>
+                    (c.EntryDate.Year == year && c.EntryDate.Month == month) ||
+                    (c.Status == CartStatus.InPlant) ||
+                    (c.ExitDate.HasValue && c.ExitDate.Value.Year == year && c.ExitDate.Value.Month == month)
+                )
+                .OrderBy(c => c.Status == CartStatus.Completed)
+                .ThenByDescending(c => c.EntryDate)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
         public async Task AddAsync(CartLog cart)
         {
             await _context.CartLogs.AddAsync(cart);
